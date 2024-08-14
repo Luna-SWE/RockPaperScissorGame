@@ -12,7 +12,7 @@ import Box from './component/Box';
 const choice = {
   rock: {
     name: 'Rock',
-    img: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSkQ7kOrHzfINznYgZLVRXvypINGbozqwGbvg&s',
+    img: 'https://feelstory.com/gnu/nori/img/2_on.png',
   },
   scissors: {
     name: 'Scissors',
@@ -26,15 +26,24 @@ const choice = {
 
 function App() {
   const [userSelect, setUserSelect] = useState(null);
+  const [computerSelect, setComputerSelect] = useState(null);
   const play = (userChoice) => {
     setUserSelect(choice[userChoice]);
+    const computerChoice = randomChoice();
+    setComputerSelect(computerChoice);
+  };
+  const randomChoice = () => {
+    const itemArray = Object.keys(choice);
+    let randomItem = Math.floor(Math.random() * itemArray.length);
+    const final = itemArray[randomItem];
+    return choice[final];
   };
 
   return (
-    <div>
+    <div className='container'>
       <div className='main'>
         <Box title='You' item={userSelect} />
-        <Box title='Computer' />
+        <Box title='Computer' item={computerSelect} />
       </div>
       <div className='main'>
         <button onClick={() => play('scissors')}>가위</button>
